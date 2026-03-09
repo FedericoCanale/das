@@ -40,6 +40,12 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li class="admin-sidebar-item">
+                    <a href="{{ route('admin.projects.index') }}" class="admin-sidebar-link {{ request()->routeIs('admin.projects.*') ? 'active' : '' }}">
+                        <i class="bi bi-folder"></i>
+                        <span>Progetti</span>
+                    </a>
+                </li>
             </ul>
 
             <div class="admin-sidebar-footer">
