@@ -20,6 +20,7 @@ class ProjectFactory extends Factory
 
         return [
             'title' => fake()->sentence(3, false),
+            'type' => fake()->randomElement(['Web Design', 'Graphic Design', 'Back End', 'Full Stack', 'Mobile']),
             'description' => fake()->paragraph(3),
             'image' => null,
             'github_url' => fake()->url(),

@@ -4,10 +4,26 @@
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center my-4">
         <h2 class="fs-4 text-secondary mb-0">Dettaglio progetto</h2>
-        <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-secondary btn-sm">
-            <i class="bi bi-arrow-left me-1"></i>Torna alla lista
-        </a>
+        <div class="d-flex gap-2">
+            <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-primary btn-sm">
+                <i class="bi bi-pencil me-1"></i>Modifica
+            </a>
+            <button type="button" class="btn btn-danger btn-sm"
+                data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <i class="bi bi-trash me-1"></i>Elimina
+            </button>
+            <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left me-1"></i>Torna alla lista
+            </a>
+        </div>
     </div>
+
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
 
     <div class="row g-4">
         {{-- Colonna principale --}}
@@ -47,6 +63,15 @@
                         <dt class="col-sm-4 text-muted">ID</dt>
                         <dd class="col-sm-8">{{ $project->id }}</dd>
 
+                        <dt class="col-sm-4 text-muted">Tipologia</dt>
+                        <dd class="col-sm-8">
+                            @if ($project->type)
+                                <span class="badge bg-secondary">{{ $project->type }}</span>
+                            @else
+                                <span class="text-muted">-</span>
+                            @endif
+                        </dd>
+
                         <dt class="col-sm-4 text-muted">Creato</dt>
                         <dd class="col-sm-8">{{ $project->created_at->format('d/m/Y') }}</dd>
 
@@ -73,6 +98,31 @@
                         </dd>
                     </dl>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Modal conferma eliminazione --}}
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Conferma eliminazione</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                Sei sicuro di voler eliminare il progetto <strong>{{ $project->title }}</strong>? L'operazione non è reversibile.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash me-1"></i>Elimina
+                    </button>
+                </form>
             </div>
         </div>
     </div>

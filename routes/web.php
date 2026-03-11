@@ -20,7 +20,7 @@ Route::middleware(['auth', 'verified'])
             return view('admin.dashboard');
         })->name('dashboard');
 
-        Route::resource('projects', ProjectController::class)->only(['index', 'show']);
+        Route::resource('projects', ProjectController::class);
     });
 
 Route::middleware('auth')->group(function () {
