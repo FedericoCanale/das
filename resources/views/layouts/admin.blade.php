@@ -52,6 +52,12 @@
                         <span>Tipologie</span>
                     </a>
                 </li>
+                <li class="admin-sidebar-item">
+                    <a href="{{ route('admin.technologies.index') }}" class="admin-sidebar-link {{ request()->routeIs('admin.technologies.*') ? 'active' : '' }}">
+                        <i class="bi bi-cpu"></i>
+                        <span>Tecnologie</span>
+                    </a>
+                </li>
             </ul>
 
             <div class="admin-sidebar-footer">

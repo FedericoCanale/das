@@ -71,12 +71,22 @@
                     </div>
 
                     <div class="col-md-8">
-                        <label for="technologies" class="form-label">Tecnologie</label>
-                        <input type="text" id="technologies" name="technologies"
-                            class="form-control @error('technologies') is-invalid @enderror"
-                            value="{{ old('technologies', $project->technologies) }}" placeholder="PHP, Laravel, Vue.js...">
+                        <label class="form-label">Tecnologie</label>
+                        <div class="d-flex flex-wrap gap-3 @error('technologies') is-invalid @enderror">
+                            @foreach ($technologies as $technology)
+                                <div class="form-check">
+                                    <input type="checkbox" id="technology-{{ $technology->id }}"
+                                        name="technologies[]" value="{{ $technology->id }}"
+                                        class="form-check-input"
+                                        {{ in_array($technology->id, old('technologies', $project->technologies->pluck('id')->toArray())) ? 'checked' : '' }}>
+                                    <label for="technology-{{ $technology->id }}" class="form-check-label">
+                                        {{ $technology->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
                         @error('technologies')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                     </div>
 

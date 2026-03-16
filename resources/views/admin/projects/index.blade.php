@@ -45,7 +45,13 @@
                                     <span class="text-muted">-</span>
                                 @endif
                             </td>
-                            <td>{{ $project->technologies ?? '-' }}</td>
+                            <td>
+                                @forelse ($project->technologies as $technology)
+                                    <span class="badge bg-primary bg-opacity-10 text-primary">{{ $technology->name }}</span>
+                                @empty
+                                    <span class="text-muted">-</span>
+                                @endforelse
+                            </td>
                             <td>
                                 @if ($project->github_url)
                                     <a href="{{ $project->github_url }}" target="_blank" class="text-dark">

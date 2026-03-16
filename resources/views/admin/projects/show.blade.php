@@ -36,13 +36,13 @@
                     <h3 class="card-title fs-4">{{ $project->title }}</h3>
                     <p class="card-text text-muted mt-3">{{ $project->description }}</p>
 
-                    @if ($project->technologies)
+                    @if ($project->technologies->isNotEmpty())
                         <div class="mt-4">
                             <h6 class="text-secondary mb-2">Tecnologie</h6>
                             <div class="d-flex flex-wrap gap-2">
-                                @foreach (explode(',', $project->technologies) as $tech)
+                                @foreach ($project->technologies as $technology)
                                     <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 px-3 py-2">
-                                        {{ trim($tech) }}
+                                        {{ $technology->name }}
                                     </span>
                                 @endforeach
                             </div>
