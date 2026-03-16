@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProjectController extends Controller
 {
-    private array $types = ['Web Design', 'Graphic Design', 'Back End', 'Full Stack', 'Mobile'];
-
     public function index(): View
     {
         $projects = Project::all();
@@ -21,7 +20,7 @@ class ProjectController extends Controller
 
     public function create(): View
     {
-        $types = $this->types;
+        $types = Type::all();
 
         return view('admin.projects.create', compact('types'));
     }
@@ -30,7 +29,7 @@ class ProjectController extends Controller
     {
         $data = $request->validate([
             'title'        => 'required|string|max:255',
-            'type'         => 'nullable|string|max:100',
+            'type_id'      => 'nullable|exists:types,id',
             'description'  => 'required|string',
             'image'        => 'nullable|string|max:255',
             'github_url'   => 'nullable|url|max:255',
@@ -50,7 +49,7 @@ class ProjectController extends Controller
 
     public function edit(Project $project): View
     {
-        $types = $this->types;
+        $types = Type::all();
 
         return view('admin.projects.edit', compact('project', 'types'));
     }
@@ -59,7 +58,7 @@ class ProjectController extends Controller
     {
         $data = $request->validate([
             'title'        => 'required|string|max:255',
-            'type'         => 'nullable|string|max:100',
+            'type_id'      => 'nullable|exists:types,id',
             'description'  => 'required|string',
             'image'        => 'nullable|string|max:255',
             'github_url'   => 'nullable|url|max:255',

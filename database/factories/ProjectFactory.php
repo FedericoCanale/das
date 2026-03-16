@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Type;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,18 +10,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProjectFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         $techStack = ['PHP', 'Laravel', 'Vue.js', 'React', 'MySQL', 'JavaScript', 'Bootstrap', 'Tailwind CSS', 'Node.js', 'PostgreSQL'];
 
         return [
             'title' => fake()->sentence(3, false),
-            'type' => fake()->randomElement(['Web Design', 'Graphic Design', 'Back End', 'Full Stack', 'Mobile']),
+            'type_id' => Type::inRandomOrder()->first()?->id,
             'description' => fake()->paragraph(3),
             'image' => null,
             'github_url' => fake()->url(),

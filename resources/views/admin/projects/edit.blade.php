@@ -27,16 +27,16 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label for="type" class="form-label">Tipologia</label>
-                        <select id="type" name="type" class="form-select @error('type') is-invalid @enderror">
+                        <label for="type_id" class="form-label">Tipologia</label>
+                        <select id="type_id" name="type_id" class="form-select @error('type_id') is-invalid @enderror">
                             <option value="">-- Seleziona --</option>
                             @foreach ($types as $type)
-                                <option value="{{ $type }}" {{ old('type', $project->type) === $type ? 'selected' : '' }}>
-                                    {{ $type }}
+                                <option value="{{ $type->id }}" {{ old('type_id', $project->type_id) == $type->id ? 'selected' : '' }}>
+                                    {{ $type->name }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('type')
+                        @error('type_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

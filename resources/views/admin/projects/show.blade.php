@@ -66,7 +66,7 @@
                         <dt class="col-sm-4 text-muted">Tipologia</dt>
                         <dd class="col-sm-8">
                             @if ($project->type)
-                                <span class="badge bg-secondary">{{ $project->type }}</span>
+                                <span class="badge bg-secondary">{{ $project->type->name }}</span>
                             @else
                                 <span class="text-muted">-</span>
                             @endif

@@ -46,6 +46,12 @@
                         <span>Progetti</span>
                     </a>
                 </li>
+                <li class="admin-sidebar-item">
+                    <a href="{{ route('admin.types.index') }}" class="admin-sidebar-link {{ request()->routeIs('admin.types.*') ? 'active' : '' }}">
+                        <i class="bi bi-tags"></i>
+                        <span>Tipologie</span>
+                    </a>
+                </li>
             </ul>
 
             <div class="admin-sidebar-footer">
